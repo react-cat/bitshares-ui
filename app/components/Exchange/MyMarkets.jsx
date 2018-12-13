@@ -23,7 +23,9 @@ import debounceRender from "react-debounce-render";
 import ZfApi from "react-foundation-apps/src/utils/foundation-api";
 import {getPossibleGatewayPrefixes, gatewayPrefixes} from "common/gateways";
 import QuoteSelectionModal from "./QuoteSelectionModal";
-import {Input, Icon} from "bitshares-ui-style-guide";
+import {Input, Icon, Tabs} from "bitshares-ui-style-guide";
+
+const TabPane = Tabs.TabPane;
 
 class MarketGroup extends React.Component {
     static defaultProps = {
@@ -340,6 +342,7 @@ class MyMarkets extends React.Component {
             activeFindBase: "USD"
         };
 
+        this._changeTab = this._changeTab.bind(this);
         this._setMinWidth = this._setMinWidth.bind(this);
         this.getAssetList = debounce(AssetActions.getAssetList.defer, 150);
 
@@ -866,30 +869,20 @@ class MyMarkets extends React.Component {
         return (
             <div className={this.props.className} style={this.props.style}>
                 {this.props.tabHeader ? (
-                    <div
+                    <Tabs
                         style={this.props.headerStyle}
-                        className="grid-block shrink left-orderbook-header bottom-header"
+                        onChange={this._changeTab}
+                        type="card"
                     >
-                        <div
-                            ref="myMarkets"
-                            className={starClass}
-                            onClick={this._changeTab.bind(this, "my-market")}
-                            data-intro={translator.translate(
-                                "walkthrough.my_markets_tab"
-                            )}
-                        >
-                            <Translate content="exchange.market_name" />
-                        </div>
-                        <div
-                            className={allClass}
-                            onClick={this._changeTab.bind(this, "find-market")}
-                            data-intro={translator.translate(
-                                "walkthrough.find_markets_tab"
-                            )}
-                        >
-                            <Translate content="exchange.more" />
-                        </div>
-                    </div>
+                        <TabPane
+                            tab={<Translate content="exchange.market_name" />}
+                            key="my-market"
+                        />
+                        <TabPane
+                            tab={<Translate content="exchange.more" />}
+                            key="find-market"
+                        />
+                    </Tabs>
                 ) : null}
                 {this.props.noHeader || this.props.tabHeader ? null : (
                     <div style={this.props.headerStyle}>
