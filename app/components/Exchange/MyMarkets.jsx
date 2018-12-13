@@ -23,7 +23,7 @@ import debounceRender from "react-debounce-render";
 import ZfApi from "react-foundation-apps/src/utils/foundation-api";
 import {getPossibleGatewayPrefixes, gatewayPrefixes} from "common/gateways";
 import QuoteSelectionModal from "./QuoteSelectionModal";
-import {Input, Icon, Tabs} from "bitshares-ui-style-guide";
+import {Input, Icon, Tabs, Checkbox} from "bitshares-ui-style-guide";
 
 const TabPane = Tabs.TabPane;
 
@@ -918,32 +918,27 @@ class MyMarkets extends React.Component {
                         }}
                     >
                         <div>
-                            <label style={{margin: "3px 0 0"}}>
-                                <input
-                                    style={{position: "relative", top: 3}}
-                                    className="no-margin"
-                                    type="checkbox"
-                                    checked={this.props.onlyLiquid}
-                                    onChange={() => {
-                                        SettingsActions.changeViewSetting({
-                                            onlyLiquid: !this.props.onlyLiquid
-                                        });
-                                    }}
-                                />
+                            <Checkbox
+                                style={{margin: "3px 0 0"}}
+                                checked={this.props.onlyLiquid}
+                                onChange={() => {
+                                    SettingsActions.changeViewSetting({
+                                        onlyLiquid: !this.props.onlyLiquid
+                                    });
+                                }}
+                            >
                                 <span style={{paddingLeft: "0.4rem"}}>
                                     <Translate content="exchange.show_only_liquid" />
                                 </span>
-                            </label>
-                            <label style={{margin: "3px 0 0"}}>
-                                <input
-                                    style={{position: "relative", top: 3}}
-                                    className="no-margin"
-                                    type="checkbox"
-                                    checked={this.props.onlyStars}
-                                    onChange={() => {
-                                        MarketsActions.toggleStars();
-                                    }}
-                                />
+                            </Checkbox>
+                            <br />
+                            <Checkbox
+                                style={{margin: "3px 0 0"}}
+                                checked={this.props.onlyStars}
+                                onChange={() => {
+                                    MarketsActions.toggleStars();
+                                }}
+                            >
                                 <span style={{paddingLeft: "0.4rem"}}>
                                     <TranslateWithLinks
                                         string="exchange.show_only_star_formatter"
@@ -957,7 +952,7 @@ class MyMarkets extends React.Component {
                                         ]}
                                     />
                                 </span>
-                            </label>
+                            </Checkbox>
                             <br />
                         </div>
                         <div className="search-wrapper">
