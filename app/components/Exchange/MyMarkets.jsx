@@ -1025,7 +1025,7 @@ class MyMarkets extends React.Component {
                                             <Translate content="account.user_issued_assets.name" />
                                             :
                                         </label>
-                                        <input
+                                        <Input
                                             style={{
                                                 fontSize: "0.9rem",
                                                 position: "relative",
